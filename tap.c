@@ -44,8 +44,9 @@ int code[MAX_KNOCKS];
 uint8_t tap_idx;
 uint8_t code_idx;
 volatile uint16_t counter;
-uint8_t idle;
-uint8_t recording;
+// TODO make this a state with an enum or something. This is dumb.
+uint8_t idle; // is the device asleep/idle
+uint8_t recording; // are we in recording or verify mode
 
 
 /*------------- Function Declarations ----------------*/
@@ -77,8 +78,8 @@ void port_direction_init(void) {
 	PRR = 0xf1;
 
   // init pb2 for button
-  DDRB &= ~(1 << PB2);
-  PORTB |= 1 << PB2;
+  DDRB &= ~(1 << PB2); //set PB2 as input
+  PORTB &= ~(1 << PB2); //don't pull up PB2
 }
 
 void init_adxl345() {
@@ -215,7 +216,7 @@ ISR(__vector_default){
 }
 
 /* ----------------- Knock pattern sensing -------------------*/
-void clear_knocks(int* arr, uint8_t* idx) {
+void clear_knocks(int* arr, int* idx) {
 	int i = 0;
 	for (; i < MAX_KNOCKS; i++) {
 		arr[i] = -1;
@@ -237,31 +238,18 @@ void replay_code() {
 		PORTB |= (1<<PB0);
 		_delay_ms(500);
 	}
+	PORTB &= ~(1<<PB0); 
 }
 
 int check() {
 	int i = 0;
 	if (tap_idx != code_idx) { 
-		/*for (; i < tap_idx; i++) {
-			flashred();
-		}
-		for(i = 0; i < code_idx; i++) {
-			flashgreen();
-		} */
-		flashred();
 		return 0;
 	}
 	i = 0;
 	uint8_t correct = 1;
 	for (; i < tap_idx; i++) {
-			/*USART0_transmit_int16((int16_t)taps[i]); // these aren't really uints so this could go badly
-			USART0_transmit(' ');
-			USART0_transmit_int16((int16_t)code[i]);
-			USART0_transmit(' ');
-			USART0_transmit('\n'); */
 		if ((taps[i] > code[i] + MATCH_THRESH) || (taps[i] < code[i] - MATCH_THRESH)) {
-//			USART0_transmit_string("wrongo");
-//			USART0_transmit('\n');
 			correct = 0;	
 			break;
 		}
@@ -286,19 +274,13 @@ void finish_tapping() {
 	//PORTB &= ~(1<<PB0); 
 	if (recording) {
 		replay_code();
-		USART0_transmit_string("code\n");
-		usart_print_arr(code, &code_idx);
 		recording = 0;
 	} else {
-		USART0_transmit_string("taps\n");
-		usart_print_arr(taps, &tap_idx);
 		int correct = check();	
 		if (!correct) {
 			flashred();
-		//	flashred();
 		} else {
 			flashgreen();
-		//	flashgreen();
 		}
 		clear_knocks(taps, &tap_idx); // clear the attempt
 	}
@@ -308,13 +290,8 @@ void finish_tapping() {
 
 
 void record_tap(int* tap_arr, int* arr_idx) {
-	USART0_transmit_string("counter ");
-	USART0_transmit_uint16(counter);
-	USART0_transmit('\n');
 	tap_arr[*arr_idx] = counter;
-	(*arr_idx)++; // girl you better make sure this works
-//	USART0_transmit_uint16(counter);
-//  USART0_transmit('\n');
+	(*arr_idx)++; 
 }
 
 /* ----------------- Helper functions -------------------*/
@@ -335,6 +312,37 @@ void flashgreen() {
 	PORTB &= ~(1<<PB1);
 }
 
+void flash_fast_pattern() {
+	PORTB &= ~(1<<PB0);
+	_delay_ms(100);
+	PORTB |= (1<<PB0);
+	_delay_ms(100);
+	PORTB &= ~(1<<PB0);
+
+	PORTB &= ~(1<<PB1);
+	_delay_ms(100);
+	PORTB |= (1<<PB1);
+	_delay_ms(100);
+	PORTB &= ~(1<<PB1);
+	
+	PORTB &= ~(1<<PB0);
+	_delay_ms(100);
+	PORTB |= (1<<PB0);
+	_delay_ms(100);
+	PORTB &= ~(1<<PB0);
+}
+
+
+void changeState() {
+	if (recording) { //switch to verify mode
+		flashred();
+	} else {//switch to recording mode
+		flash_fast_pattern();	
+		clear_knocks(code, &code_idx); // clear the old code
+	}
+	recording = !recording;
+}
+
 /*----------------------- MAIN ----------------------*/
 int main(void) {
 	uint8_t readings[16] ;
@@ -353,13 +361,17 @@ int main(void) {
 
 		int_source = read_adxl_reg(INT_SOURCE_ADDRESS); // necessary for generating interrupts
 		_delay_ms(10);
-    if (~(PINB & 1<<PB2)){  // should see if button is pressed
+		if (PINB & (1<<PB2)) {
+			changeState();
+		}
+		PORTB &= ~(1<<PB1);
+    /*if ((PINB & (1<<PB2))){  // should see if button is pressed
       flashred();
       flashgreen();
       flashred();
-    }
+    }*/
 	//	PORTB &= ~(1<<PB0);
-		PORTB &= ~(1<<PB1); // green LED off 
+//		PORTB &= ~(1<<PB1); // green LED off 
 		set_sleep_mode(0x1);  // ADC noise reduction - best power savings possible wiht interrupt still working
 		sleep_mode();
 	}
