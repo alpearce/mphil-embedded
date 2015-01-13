@@ -65,7 +65,7 @@ void port_direction_init(void) {
 /* define outputs for PORTC */
 	DDRC = 0 ;
 	DDRD = 0;
-	PORTB = 0xBF;
+	PORTB = 0xBF; //10111111
 	PORTC = 0; 
 	PORTD = 0;
 	
@@ -75,6 +75,10 @@ void port_direction_init(void) {
 	PORTC = 0xff;
 	PORTD = 0xff;
 	PRR = 0xf1;
+
+  // init pb2 for button
+  DDRB &= ~(1 << PB2);
+  PORTB |= 1 << PB2;
 }
 
 void init_adxl345() {
@@ -349,6 +353,11 @@ int main(void) {
 
 		int_source = read_adxl_reg(INT_SOURCE_ADDRESS); // necessary for generating interrupts
 		_delay_ms(10);
+    if (~(PINB & 1<<PB2)){  // should see if button is pressed
+      flashred();
+      flashgreen();
+      flashred();
+    }
 	//	PORTB &= ~(1<<PB0);
 		PORTB &= ~(1<<PB1); // green LED off 
 		set_sleep_mode(0x1);  // ADC noise reduction - best power savings possible wiht interrupt still working
