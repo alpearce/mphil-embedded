@@ -1,0 +1,514 @@
+
+%% bare_conf.tex
+%% V1.3
+%% 2007/01/11
+%% by Michael Shell
+%% See:
+%% http://www.michaelshell.org/
+%% for current contact information.
+%%
+%% This is a skeleton file demonstrating the use of IEEEtran.cls
+%% (requires IEEEtran.cls version 1.7 or later) with an IEEE conference paper.
+%%
+%% Support sites:
+%% http://www.michaelshell.org/tex/ieeetran/
+%% http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/
+%% and
+%% http://www.ieee.org/
+
+%%*************************************************************************
+%% Legal Notice:
+%% This code is offered as-is without any warranty either expressed or
+%% implied; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% User assumes all risk.
+%% In no event shall IEEE or any contributor to this code be liable for
+%% any damages or losses, including, but not limited to, incidental,
+%% consequential, or any other damages, resulting from the use or misuse
+%% of any information contained here.
+%%
+%% All comments are the opinions of their respective authors and are not
+%% necessarily endorsed by the IEEE.
+%%
+%% This work is distributed under the LaTeX Project Public License (LPPL)
+%% ( http://www.latex-project.org/ ) version 1.3, and may be freely used,
+%% distributed and modified. A copy of the LPPL, version 1.3, is included
+%% in the base LaTeX documentation of all distributions of LaTeX released
+%% 2003/12/01 or later.
+%% Retain all contribution notices and credits.
+%% ** Modified files should be clearly indicated as such, including  **
+%% ** renaming them and changing author support contact information. **
+%%
+%% File list of work: IEEEtran.cls, IEEEtran_HOWTO.pdf, bare_adv.tex,
+%%                    bare_conf.tex, bare_jrnl.tex, bare_jrnl_compsoc.tex
+%%*************************************************************************
+
+% *** Authors should verify (and, if needed, correct) their LaTeX system  ***
+% *** with the testflow diagnostic prior to trusting their LaTeX platform ***
+% *** with production work. IEEE's font choices can trigger bugs that do  ***
+% *** not appear when using other class files.                            ***
+% The testflow support page is at:
+% http://www.michaelshell.org/tex/testflow/
+
+
+
+% Note that the a4paper option is mainly intended so that authors in
+% countries using A4 can easily print to A4 and see how their papers will
+% look in print - the typesetting of the document will not typically be
+% affected with changes in paper size (but the bottom and side margins will).
+% Use the testflow package mentioned above to verify correct handling of
+% both paper sizes by the user's LaTeX system.
+%
+% Also note that the "draftcls" or "draftclsnofoot", not "draft", option
+% should be used if it is desired that the figures are to be displayed in
+% draft mode.
+%
+\documentclass[conference]{./IEEEtran}
+% Add the compsoc option for Computer Society conferences.
+%
+% If IEEEtran.cls has not been installed into the LaTeX system files,
+% manually specify the path to it like:
+% \documentclass[conference]{../sty/IEEEtran}
+
+
+
+
+
+% Some very useful LaTeX packages include:
+% (uncomment the ones you want to load)
+
+
+% *** MISC UTILITY PACKAGES ***
+%
+%\usepackage{ifpdf}
+% Heiko Oberdiek's ifpdf.sty is very useful if you need conditional
+% compilation based on whether the output is pdf or dvi.
+% usage:
+% \ifpdf
+%   % pdf code
+% \else
+%   % dvi code
+% \fi
+% The latest version of ifpdf.sty can be obtained from:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/oberdiek/
+% Also, note that IEEEtran.cls V1.7 and later provides a builtin
+% \ifCLASSINFOpdf conditional that works the same way.
+% When switching from latex to pdflatex and vice-versa, the compiler may
+% have to be run twice to clear warning/error messages.
+
+
+
+
+
+
+% *** CITATION PACKAGES ***
+%
+%\usepackage{cite}
+% cite.sty was written by Donald Arseneau
+% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
+% \cite{} output to follow that of IEEE. Loading the cite package will
+% result in citation numbers being automatically sorted and properly
+% "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
+% cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
+% \cite will automatically add leading space, if needed. Use cite.sty's
+% noadjust option (cite.sty V3.8 and later) if you want to turn this off.
+% cite.sty is already installed on most LaTeX systems. Be sure and use
+% version 4.0 (2003-05-27) and later if using hyperref.sty. cite.sty does
+% not currently provide for hyperlinked citations.
+% The latest version can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/cite/
+% The documentation is contained in the cite.sty file itself.
+
+
+
+
+
+
+% *** GRAPHICS RELATED PACKAGES ***
+%
+\ifCLASSINFOpdf
+  % \usepackage[pdftex]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+  % \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../eps/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.eps}
+\fi
+% graphicx was written by David Carlisle and Sebastian Rahtz. It is
+% required if you want graphics, photos, etc. graphicx.sty is already
+% installed on most LaTeX systems. The latest version and documentation can
+% be obtained at: 
+% http://www.ctan.org/tex-archive/macros/latex/required/graphics/
+% Another good source of documentation is "Using Imported Graphics in
+% LaTeX2e" by Keith Reckdahl which can be found as epslatex.ps or
+% epslatex.pdf at: http://www.ctan.org/tex-archive/info/
+%
+% latex, and pdflatex in dvi mode, support graphics in encapsulated
+% postscript (.eps) format. pdflatex in pdf mode supports graphics
+% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
+% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
+% not a bitmapped formats (.jpeg, .png). IEEE frowns on bitmapped formats
+% which can result in "jaggedy"/blurry rendering of lines and letters as
+% well as large increases in file sizes.
+%
+% You can find documentation about the pdfTeX application at:
+% http://www.tug.org/applications/pdftex
+
+
+
+
+
+% *** MATH PACKAGES ***
+%
+%\usepackage[cmex10]{amsmath}
+% A popular package from the American Mathematical Society that provides
+% many useful and powerful commands for dealing with mathematics. If using
+% it, be sure to load this package with the cmex10 option to ensure that
+% only type 1 fonts will utilized at all point sizes. Without this option,
+% it is possible that some math symbols, particularly those within
+% footnotes, will be rendered in bitmap form which will result in a
+% document that can not be IEEE Xplore compliant!
+%
+% Also, note that the amsmath package sets \interdisplaylinepenalty to 10000
+% thus preventing page breaks from occurring within multiline equations. Use:
+%\interdisplaylinepenalty=2500
+% after loading amsmath to restore such page breaks as IEEEtran.cls normally
+% does. amsmath.sty is already installed on most LaTeX systems. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/required/amslatex/math/
+
+
+
+
+
+% *** SPECIALIZED LIST PACKAGES ***
+%
+%\usepackage{algorithmic}
+% algorithmic.sty was written by Peter Williams and Rogerio Brito.
+% This package provides an algorithmic environment fo describing algorithms.
+% You can use the algorithmic environment in-text or within a figure
+% environment to provide for a floating algorithm. Do NOT use the algorithm
+% floating environment provided by algorithm.sty (by the same authors) or
+% algorithm2e.sty (by Christophe Fiorio) as IEEE does not use dedicated
+% algorithm float types and packages that provide these will not provide
+% correct IEEE style captions. The latest version and documentation of
+% algorithmic.sty can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/algorithms/
+% There is also a support site at:
+% http://algorithms.berlios.de/index.html
+% Also of interest may be the (relatively newer and more customizable)
+% algorithmicx.sty package by Szasz Janos:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/algorithmicx/
+
+
+
+
+% *** ALIGNMENT PACKAGES ***
+%
+%\usepackage{array}
+% Frank Mittelbach's and David Carlisle's array.sty patches and improves
+% the standard LaTeX2e array and tabular environments to provide better
+% appearance and additional user controls. As the default LaTeX2e table
+% generation code is lacking to the point of almost being broken with
+% respect to the quality of the end results, all users are strongly
+% advised to use an enhanced (at the very least that provided by array.sty)
+% set of table tools. array.sty is already installed on most systems. The
+% latest version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/required/tools/
+
+
+%\usepackage{mdwmath}
+%\usepackage{mdwtab}
+% Also highly recommended is Mark Wooding's extremely powerful MDW tools,
+% especially mdwmath.sty and mdwtab.sty which are used to format equations
+% and tables, respectively. The MDWtools set is already installed on most
+% LaTeX systems. The lastest version and documentation is available at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/mdwtools/
+
+
+% IEEEtran contains the IEEEeqnarray family of commands that can be used to
+% generate multiline equations as well as matrices, tables, etc., of high
+% quality.
+
+
+%\usepackage{eqparbox}
+% Also of notable interest is Scott Pakin's eqparbox package for creating
+% (automatically sized) equal width boxes - aka "natural width parboxes".
+% Available at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/eqparbox/
+
+
+
+
+
+% *** SUBFIGURE PACKAGES ***
+%\usepackage[tight,footnotesize]{subfigure}
+% subfigure.sty was written by Steven Douglas Cochran. This package makes it
+% easy to put subfigures in your figures. e.g., "Figure 1a and 1b". For IEEE
+% work, it is a good idea to load it with the tight package option to reduce
+% the amount of white space around the subfigures. subfigure.sty is already
+% installed on most LaTeX systems. The latest version and documentation can
+% be obtained at:
+% http://www.ctan.org/tex-archive/obsolete/macros/latex/contrib/subfigure/
+% subfigure.sty has been superceeded by subfig.sty.
+
+
+
+%\usepackage[caption=false]{caption}
+%\usepackage[font=footnotesize]{subfig}
+% subfig.sty, also written by Steven Douglas Cochran, is the modern
+% replacement for subfigure.sty. However, subfig.sty requires and
+% automatically loads Axel Sommerfeldt's caption.sty which will override
+% IEEEtran.cls handling of captions and this will result in nonIEEE style
+% figure/table captions. To prevent this problem, be sure and preload
+% caption.sty with its "caption=false" package option. This is will preserve
+% IEEEtran.cls handing of captions. Version 1.3 (2005/06/28) and later 
+% (recommended due to many improvements over 1.2) of subfig.sty supports
+% the caption=false option directly:
+%\usepackage[caption=false,font=footnotesize]{subfig}
+%
+% The latest version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/subfig/
+% The latest version and documentation of caption.sty can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/caption/
+
+
+
+
+% *** FLOAT PACKAGES ***
+%
+%\usepackage{fixltx2e}
+% fixltx2e, the successor to the earlier fix2col.sty, was written by
+% Frank Mittelbach and David Carlisle. This package corrects a few problems
+% in the LaTeX2e kernel, the most notable of which is that in current
+% LaTeX2e releases, the ordering of single and double column floats is not
+% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
+% single column figure to be placed prior to an earlier double column
+% figure. The latest version and documentation can be found at:
+% http://www.ctan.org/tex-archive/macros/latex/base/
+
+
+
+%\usepackage{stfloats}
+% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
+% the ability to do double column floats at the bottom of the page as well
+% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
+% LaTeX2e). It also provides a command:
+%\fnbelowfloat
+% to enable the placement of footnotes below bottom floats (the standard
+% LaTeX2e kernel puts them above bottom floats). This is an invasive package
+% which rewrites many portions of the LaTeX2e float routines. It may not work
+% with other packages that modify the LaTeX2e float routines. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/sttools/
+% Documentation is contained in the stfloats.sty comments as well as in the
+% presfull.pdf file. Do not use the stfloats baselinefloat ability as IEEE
+% does not allow \baselineskip to stretch. Authors submitting work to the
+% IEEE should note that IEEE rarely uses double column equations and
+% that authors should try to avoid such use. Do not be tempted to use the
+% cuted.sty or midfloat.sty packages (also by Sigitas Tolusis) as IEEE does
+% not format its papers in such ways.
+
+
+
+
+
+% *** PDF, URL AND HYPERLINK PACKAGES ***
+%
+%\usepackage{url}
+% url.sty was written by Donald Arseneau. It provides better support for
+% handling and breaking URLs. url.sty is already installed on most LaTeX
+% systems. The latest version can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/misc/
+% Read the url.sty source comments for usage information. Basically,
+% \url{my_url_here}.
+
+
+
+
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+% There should be no need to do such things with IEEEtran.cls V1.6 and later.
+% (Unless specifically asked to do so by the journal or conference you plan
+% to submit to, of course. )
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{ADXL345 Knock Pattern Sensor}
+
+
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+\author{\IEEEauthorblockN{Allison Pearce}
+\IEEEauthorblockA{St. Edmund's College\\ 
+ap819@cam.ac.uk}
+}
+
+\maketitle
+
+
+\section{Introduction}
+% objective
+% something about passwords sucking
+% usefulness of knock patterns
+% prior work? probably wouldn't hurt to cite something
+This paper describes a low-power knock pattern sensor built using an Atmel ATmega 644P microcontroller and an ADXL345 triple axis accelerometer. Knock pattern sensors have a number of useful applications. Shock sensors are often used to detect forcible entry into roadside telecommunications cabinets, and when a knock sensor is present, authorized personnel can enter a tap code to override the alarm. Knock patterns can also be used as an unlocking mechanism for a door or safe. Tap authentication has been investigated as a replacement for passwords in mobile devices \cite{marques}. Marques et al. claim that tap authentication is comparable to industry standards for security and usability with the added advantage of being inconspicuous. Tapping wireless devices together can also form part of a protocol for communication and information transfer \cite{thorn}. For example, users can tap two phones together to share an image from one to the other.
+
+The primary goal of this project was to make a functional knock pattern sensor that could compare a reasonably complex knock pattern to a previously recorded pattern. This required sensitive tap detection with minimal false positives and a method of representing and comparing knock patterns. The device also needed to be low power and simple to use. 
+
+\section{Preparation}
+% Any assumptions made, which devices used and why, is there enough storage capacity for example.
+\subsection{Device Selection}
+%TODO this
+This project required a microcontroller and a sensor to perform knock detection. The Ateml ATmega 644P was selected for the microcontroller because [reverse engineer an answer here. It should probably be about this many words long. Additionally, a second reason would be good, because you want to sound compelling and get in the ballpark of 4000 words lolol]. The system's storage requirements were low, so the XXYB of the ATmega 644P were more than sufficient.
+
+The ADXL345 triple axis accelerometer was chosen as the knock sensor for its sensitivity and ease of use. Alternatives included shock sensors and other types of accelerometers. An accelerometer was preferred to a shock sensor because previous implementations of knock pattern sensors reported that shock sensors were difficult to interpret. Compared to other accelerometers, the ADXL345 provides several unique and advantageous features. Chief among these is its built-in tap detection function. Taps are defined by several parameters that can be used to tune the sensitivity of the knock sensor, and detected taps can trigger an interrupt in the microcontroller. The ADXL345 is a digital accelerometer that uses SPI or I$^2$C to communicate with the microcontroller. It has one of the lowest power requirements. A power comparison of the ADXL345 and other accelerometers is shown in Table \ref{table_power}. The ADXL345 also provides programmable power modes than can be used to further reduce power consumption.  
+
+%TODO real data for this
+\begin{table}[!b]
+\label{table_power}
+\centering
+\begin{tabular}{ccc}
+Model & Voltage & Current\\
+\hline
+ADXL 345 & 2.0-3.6V & 40-145$\mu$A\\
+ADXL 345 & 2.0-3.6V & 40-145 A\\
+ADXL 345 & 2.0-3.6V & 40-145 A\\
+\hline
+\end{tabular}
+\vspace{2mm}
+\caption{Accelerometer Power Requirement Comparison}
+\end{table}
+
+\section{Implementation}
+% mention that you used the starter code
+% especially talk about what was done to reduce power consumption
+\subsection{System Overview}
+The device has two modes of operation, one for recording passcodes and one for comparing input knock patterns to the stored pattern. To enter recording mode, the user holds down a button until a red LED flashes. The user knocks the pattern, and a green LED flashes as each knock is registered. After five seconds of inactivity, the recording period times out, the green LED flashes the pattern back to the user for verification, and the device enters listening mode. In listening mode, the device sleeps until interrupted by a knock. It will record any subsequent knocks until five seconds passes without activity. It then compares the new pattern to the recorded pattern. A green LED flashes if the pattern is correct, otherwise a red LED flashes. 
+
+\subsection{Hardware}
+%TODO see what the switch is actually called
+%TODO make sure I'm not lying about the switch SPI business 
+%TODO take a picture and make a figure
+In addition to the microcontroller and accelerometer, this project required a 5V 100mA power supply, a prototyping board, wires, a programming cable, a four-way switch, two LEDs, one (TODO)pf capacitor, and a button. The switch was necessary because the accelerometer communicates with the microcontroller over SPI, which uses the same pins as the programmer (MOSI, MISO, TODO finish elaborating). When programming the microcontroller, the switch is open(?), and when running the program with the accelerometer, the switch must be closed(?). The microcontroller, accelerometer, and accessories were connected as shown in Figure [TODO].  
+
+\subsection{Software}
+% TODO actually read the code; could be more stuff there
+% TODO make sure I don't have the timer running all the time
+% TODO timer/counter details
+The C program executed by the microcontroller consists of several initialization functions, a simple main loop, interrupt handlers, and functions to record and compare knock patterns.
+
+The initialization functions establish the communication method between the ATmega 644P and the accelerometer, set values for the tap detection parameters and other ADXL345 registers, set parameters for the timer, and enable interrupts. The two most important parameters for tap detection are the tap threshold and the window. The tap threshold determines the minimum acceleration value that is considered a tap, and the window is the maximum time that the acceleration can remain above the threshold. Adjusting these parameters makes the system more or less sensitive to knocks. The other ADXL345 registers that were set and their values are described in Appendix TODO. 
+
+The bulk of the work in the software is triggered from the tap interrupt. Upon receiving the first tap after a period of inactivity, the tap interrupt starts a timer implemented using the ATmega 644P's built-in THING. Subsequent tap interrupts cause the timer value to be recorded and then clear and restart the timer. A timer interrupt is used to prevent overflow errors in the timer's counter. The timer interrupt is also responsible for calling the appropriate function after five seconds of inactivity: in record mode, it flashes the pattern back to the user, and in verify mode, it compares the input pattern to the recorded pattern and flashes the green or red LED depending on if it was correct. 
+
+%TODO is it really ints or int16_t 
+%TODO record final tap window value
+Knock patterns are defined by the intervals between taps and stored as arrays of integers. When comparing patterns, the new pattern is immediately invalidated if it has a different number of knocks than the code pattern. The new pattern is accepted if it has the same number of taps as the code and each interval is within an acceptable range of the code's interval for that position in the sequence. The range can be changed to tune the sensitivity of the device, but 4ms was determined to be a reasonable default.
+
+One optional features of the ADXL345 that was disabled in software is double tap detection. It is possible to make a distinction between single taps and double taps by defining additional parameters and flipping bits in the appropriate registers. Handling single and double taps differently offered no significant advantages for distinguishing different knock patterns, but it would have increased the complexity of how knock patterns are stored and compared. 
+
+%TODO describe the button business, assuming I get around to it
+
+\subsection{Power Concerns}
+%List PRR things I was able to kill and why I wasn't able to kill some
+%Make sure all the things in the PRR were really necessary and see if you can enable/disable after taps
+Low power consumption was a primary goal of the system achieved through a combination of power reduction strategies. The microcontroller enters ADC noise reduction sleep mode whenever five seconds pass without a knock interrupt. This sleep mode provided the greatest possible power reduction while still allowing the microcontroller to respond to knock interrupts. The accelerometer operates in a power saving mode, with all unnecessary functions turned off in the Power Reduction Register (PRR). TODO, TODO, and TODO were disabled. TODO and TODO remained on because TODO1 was necessary for THING1 and THING2 relied on uninterrupted function of TODO2.  Though the ADXL345 offers a sleep mode, it was not used because [GREAT REASON OTHER THAN LAZINESS]. Another simple strategy that yielded a huge power reduction was adding pull-up resistors on all inputs to prevent them from floating.
+
+\subsection{Challenges}
+% TODO look back through the code and find some more challenges
+A difficult step early in the development process was configuring tap detection on the ADXL345. Most of the process is easy to follow, but I did not realize that the SOMETHING register had to be read in the main loop in order for the tap interrupt to fire until I happened to add a line reading from the register for debugging. Suddenly, tap detection worked.  
+
+Another step that was less straightforward that expected was determining the sleep mode. Based on the documentation for the ATmega 644P and the ADXL345, I expected TODO sleep mode to work because it says THING. In practice, however, I found that tap interrupts did not wake the microcontroller unless I used ADC noise reduction sleep mode. Someone with a more familiarity with Atmel sleep modes is unlikely to encounter this problem.
+
+\section{Evaluation}
+The goal of the project was to make a low-power knock pattern sensor that was accurate and easy to use. All aspects of this goal were accomplished. 
+
+\subsection{Power Consumption}
+% is there a way to compute life of a battery or something based on this
+% computing something would probably make me look good
+Before any measures were taken to reduce power consumption, the device drew between XXA when idle and XXA when flashing the LEDs. After adding the sleep mode and changing the Power Reduction Register value, this was reduced to XXA when idle and XXA when flashing. Adding the pull-up resistors to prevent inputs from floating further reduced power consumption to between XXA and XXA. 
+
+\subsection{Accuracy}
+\begin{table}
+\label{accuracy_table}
+\centering
+\begin{tabular}{ccc}
+Pattern Length & \% Correct Pattern Accepted & \% Incorrect Pattern Rejected\\
+\hline
+3 & 100 & 100\\
+3 & 100 & 100\\
+3 & 100 & 100\\
+3 & 100 & 100\\
+3 & 100 & 100\\
+3 & 100 & 100\\
+3 & 100 & 100\\
+3 & 100 & 100\\
+3 & 100 & 100\\
+3 & 100 & 100\\
+\hline
+\end{tabular}
+\vspace{2mm}
+\caption{Sensor Accuracy Results}
+\end{table}
+
+%TODO talk about how this affects security as well
+The accuracy of the device can be affected to some degree by manipulating the sensitivity of the knock sensor. This is achieved by changing the tap threshold, tap window, and the size of the window used to compare knock intervals. A less sensitive knock sensor would register fewer false positive knocks and might perform better in a noisy environment, but it would require the user to be more deliberate about knocking, because lighter taps would not register. This might make it more challenging to input certain types of knock patterns. A more sensitive sensor, on the other hand, might interpret an accidental hand slip as a knock. Therefore it is better for accuracy if the user is aware of the device's settings and how they affect the expectations for knocking. 
+
+%TODO real numbers
+Reasonable defaults for the tap threshold, tap window, and comparison window were determined to be X, Y, and Z. Using these values, I tested ten different patterns of varying complexity. I recorded the pattern, input the correct pattern five times and an incorrect pattern five times, and then repeated the process again (so each correct pattern was verified ten times). The results of this experiment are shown in Table \ref{accuracy_table}. Precision and recall were computer to be XX and YY, respectively. This shows that the device is highly accurate. One limitation of this project is that there was limited experimentation involving one user recording the passcode and another user attempting to enter it. This scenario is less importance for tap sensing in mobile phone authentication or and other single-user use cases, but is something that should be explored for cases in which multiple users operate the same device. 
+
+\subsection{Ease of Use}
+The device was not intended to be a complex system, and it provides all the functionality and feedback required with just one button, two LEDs, and the knock sensor. Resetting the code is a simple process, requiring only a button press and demonstration of the new pattern. The meanings of the various LED flashes are intuitive (green flashes to register knocks and replay the pattern, green or red flashes when reporting whether the pattern was correct). 
+
+\section{Future Work}
+% how it could be improved, applications
+The sensor described in this paper provides all the functionality needed to record and detect knock patterns, but several more sophisticated features could be added. One useful extension would be the ability to store multiple patterns in different categories. This would be useful if the sensor was used to open a door, for example. The owner of the building could have a master pattern and the option to add a one-time passcode for a contractor or a passcode that expires after a set time to be used for guests coming to a party. Other extensions of password modules could also apply, such as providing hints if the user forgets the code. A more sophisticated user interface could be created by adding an LCD screen and a keypad for user inputs other than knock patterns. However, these enhancements would significantly increase the memory and power requirements. Future work could also include incorporating the sensor with an application---attaching it to a servo-based locking mechanism and using it to unlock a door, or integrating it with a laptop or phone to replace the login password. 
+
+\section{Summary}
+I implemented a low-power knock pattern sensor that is simple to use and adaptable to a variety of applications. The system was built using an Amtega 644P microcontroller and an ADXL345 triple axis accelerometer. The device is highly accurate and the level of sensitivity can be customized to increase security or to reduce interference from noisy environments. The ADXL345 was an excellent choice for the knock sensor, especially because it provides an easily configured tap detection function. The code for storing and comparing knock patterns was both simple and effective, and did not seem to limit the complexity of knock patterns that could be recorded and verified.
+
+\bibliographystyle{plain}
+\bibliography{proj}
+
+
+% that's all folks
+\end{document}
+
+
+
+% What DIDN'T work? Where did I get stuck/spend lots of time debugging? 
+% Alternatives considered but not used
+% software
+%   store patterns differently
+% hardware 
+%   microcontroller, shock sensor
+% overall system 
+%   more buttons, switches, lights, junk
+% add some kind of "challenges" section?
+% TODO Fix the references for the tables
+
+
+% challenges
+% figuring out tap detection/making all that jazz work
+% figuring out which power modes would work
+% 

@@ -1,0 +1,16 @@
+\begin{thebibliography}{1}
+
+\bibitem{marques}
+Diogo Marques, Tiago Guerreiro, Lu\'{\i}s Duarte, and Lu\'{\i}s Carri\c{c}o.
+\newblock Under the table: Tap authentication for smartphones.
+\newblock In {\em Proceedings of the 27th International BCS Human Computer
+  Interaction Conference}, BCS-HCI '13, pages 33:1--33:6, Swinton, UK, 2013.
+  British Computer Society.
+
+\bibitem{thorn}
+O.K. THORN.
+\newblock Interacting with devices based on physical device-to-device contact,
+  July~9 2013.
+\newblock US Patent 8,482,403.
+
+\end{thebibliography}
