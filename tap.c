@@ -11,7 +11,7 @@
 #include <util/delay.h>
 #include <util/delay_basic.h>
 
-#define THRESH_TAP 80 
+#define THRESH_TAP 70 
 #define DUR 16 // max duration for a tap
 #define LATENT 0 //disable double taps
 #define WINDOW 0 //disable double taps 
@@ -23,6 +23,7 @@
 
 #define MAX_KNOCKS 32 // maximum length of the pattern
 #define MATCH_THRESH 20 // even 10 should be reasonably ok 
+#define TIMEOUT 300 // tens of ms before tap processing starts
 
 
 /* Fuses  H 0xDF  (default)
@@ -69,12 +70,14 @@ void port_direction_init(void) {
 	PORTB = 0xBF; //10111111
 	PORTC = 0; 
 	PORTD = 0;
-	
-	//for power saving
+
+//  Pull up inputs
   PORTA = 0xff;
-//	PORTB = 0xff;
+//	PORTB = 0xff; 
+ PORTB = ~(1<<PB2); //don't pull up PB2
 	PORTC = 0xff;
 	PORTD = 0xff;
+// Power register
 	PRR = 0xf1;
 
   // init pb2 for button
@@ -205,7 +208,7 @@ ISR(INT1_vect) {
 
 ISR(TIMER1_COMPA_vect) {
 	counter++; //counts 10s of milliseconds
-	if (counter > 500 && !idle) {
+	if (counter > TIMEOUT && !idle) {
 		finish_tapping();
 		//go to sleep? 
 	}
@@ -228,7 +231,7 @@ void replay_code() {
 	int i = 0;
 	int j;
 	PORTB |= (1<<PB0);
-	_delay_ms(500); 
+	_delay_ms(100); 
 	for (; i < code_idx; i++) {
 		j = 0;
 		PORTB &= ~(1<<PB0); // red LED off
@@ -236,7 +239,7 @@ void replay_code() {
 			_delay_ms(10); // have to give this function a constant
 		}
 		PORTB |= (1<<PB0);
-		_delay_ms(500);
+		_delay_ms(100);
 	}
 	PORTB &= ~(1<<PB0); 
 }
@@ -269,9 +272,6 @@ void usart_print_arr(int* arr, uint8_t* idx) {
 }
 
 void finish_tapping() {
-	//PORTB |= (1<<PB0); // blink red LED
-	//_delay_ms(2000);
-	//PORTB &= ~(1<<PB0); 
 	if (recording) {
 		replay_code();
 		recording = 0;
@@ -285,7 +285,6 @@ void finish_tapping() {
 		clear_knocks(taps, &tap_idx); // clear the attempt
 	}
 	idle = 1;
-//	PORTB |= (1<<PB0); //red LED on
 }
 
 
@@ -365,13 +364,8 @@ int main(void) {
 			changeState();
 		}
 		PORTB &= ~(1<<PB1);
-    /*if ((PINB & (1<<PB2))){  // should see if button is pressed
-      flashred();
-      flashgreen();
-      flashred();
-    }*/
-	//	PORTB &= ~(1<<PB0);
-//		PORTB &= ~(1<<PB1); // green LED off 
+		if (code_idx > 0)
+			PORTB &= ~(1<<PB0); // red LED off if we have a password
 		set_sleep_mode(0x1);  // ADC noise reduction - best power savings possible wiht interrupt still working
 		sleep_mode();
 	}
